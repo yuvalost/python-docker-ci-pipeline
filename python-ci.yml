@@ -1,0 +1,24 @@
+name: Python Docker CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker
+      run: docker --version
+
+    - name: Build Docker image
+      run: docker build -t python-app .
+
+    - name: Run Docker container (for test)
+      run: docker run --rm python-app
